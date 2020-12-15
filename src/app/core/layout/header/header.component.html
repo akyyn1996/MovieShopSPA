@@ -8,22 +8,32 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+
+        <li class="nav-item" *ngIf="!isUserAuthenticated">
+          <a
+            class="btn btn-outline-primary btn-sm rounded-pill"
+            [routerLink]="['/login']"
+            >Login</a
+          >
         </li>
-        <li class="nav-item dropdown">
-            <div ngbDropdown>
-              <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Genres
-                </a>
-                <div ngbDropdownMenu  class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <app-genres></app-genres>
-                </div>
-            </div>
-          </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <li class="nav-item" *ngIf="!isUserAuthenticated">
+          <a
+            class="btn btn-outline-primary btn-sm rounded-pill"
+            [routerLink]="['/register']"
+            >Register</a
+          >
         </li>
+        <li class="nav-item" *ngIf="isUserAuthenticated">
+          <a class="btn btn-outline-primary btn-sm rounded-pill" (click)= "logout()"  [routerLink]="['/']"
+            >Logout</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="isUserAuthenticated">
+          <span class="navbar-text">
+            {{ logedInUser.family_name + " " + logedInUser.given_name }}
+          </span>
+        </li>
+
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
